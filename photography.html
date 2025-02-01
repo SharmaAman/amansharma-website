@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Aman Sharma | Photography</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <header class="header">
+        <nav>
+            <ul>
+                <li><a href="index.html" class="nav-link">Home</a></li>
+                <li><a href="#photography" class="nav-link">Photography</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <div class="photo-grid">
+            <img src="https://picsum.photos/600/800?random=1" alt="Architecture" onclick="openLightbox(this)">
+            <img src="https://picsum.photos/600/600?random=2" alt="Street" onclick="openLightbox(this)">
+            <img src="https://picsum.photos/600/700?random=3" alt="Portrait" onclick="openLightbox(this)">
+            <img src="https://picsum.photos/600/900?random=4" alt="Landscape" onclick="openLightbox(this)">
+            <img src="https://picsum.photos/600/800?random=5" alt="Abstract" onclick="openLightbox(this)">
+            <img src="https://picsum.photos/600/600?random=6" alt="Minimal" onclick="openLightbox(this)">
+        </div>
+
+        <div class="lightbox" onclick="closeLightbox()">
+            <img src="" alt="Enlarged view">
+        </div>
+    </main>
+
+    <script src="scripts.js"></script>
+</body>
+</html>
