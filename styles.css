@@ -220,6 +220,85 @@ nav ul {
     color: #444;
 }
 
+/* Experience Item with Icon */
+.experience-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 2rem;
+    margin-bottom: 2rem;
+    padding: 1.5rem;
+    border: 1px solid var(--gray-2);
+    border-radius: 4px;
+    position: relative;
+    background: var(--white); /* Ensure background is white */
+}
+
+.experience-content {
+    flex: 1;
+}
+
+.experience-icon {
+    width: 60px; /* Default size */
+    height: 60px; /* Default size */
+    border-radius: 50%;
+    object-fit: cover;
+    border: 2px solid var(--gray-2);
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    position: absolute;
+    right: -15px; /* Position at the edge */
+    top: -5%;
+    transform: translateY(-0%);
+}
+
+.education-icon {
+    width: 60px; /* Default size */
+    height: 60px; /* Default size */
+    border-radius: 10%;
+    object-fit: cover;
+    border: 2px solid var(--gray-2);
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    position: absolute;
+    right: -15px; /* Position at the edge */
+    top: -5%;
+    transform: translateY(-0%);
+}
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .experience-icon {
+        width: 55px; /* Smaller size for tablets */
+        height: 55px;
+        top: -05%;
+        right: -15px;
+    }
+}
+
+@media (max-width: 480px) {
+    .experience-icon {
+        width: 40px; /* Smaller size for mobile */
+        height: 40px;
+        top: -2%;
+        right: -12px;
+    }
+}
+
+@media (max-width: 768px) {
+    .education-icon {
+        width: 55px; /* Smaller size for mobile */
+        height: 55px;
+        top: -05%;
+        right: -15px;
+    }
+}
+
+@media (max-width: 480px) {
+    .education-icon {
+        width: 40px; /* Smaller size for mobile */
+        height: 40px;
+        top: -02%;
+        right: -12px;
+    }
+}
+
 /* Projects Section
 ---------------------------------------------*/
 
