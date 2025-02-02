@@ -194,3 +194,32 @@ document.addEventListener('DOMContentLoaded', function () {
 
 
 
+// Lazy load images
+document.addEventListener('DOMContentLoaded', function () {
+    const lazyImages = document.querySelectorAll('.lazy-load');
+
+    const lazyLoad = (image) => {
+        const src = image.getAttribute('data-src');
+        if (!src) return;
+
+        // Load the image
+        image.src = src;
+        image.classList.add('loaded'); // Add a class to indicate the image is loaded
+        image.removeAttribute('data-src'); // Remove the data-src attribute
+    };
+
+    const lazyImageObserver = new IntersectionObserver((entries, observer) => {
+        entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+                lazyLoad(entry.target);
+                observer.unobserve(entry.target); // Stop observing once the image is loaded
+            }
+        });
+    }, {
+        rootMargin: '0px 0px 200px 0px', // Load images 200px before they enter the viewport
+    });
+
+    lazyImages.forEach((image) => {
+        lazyImageObserver.observe(image); // Start observing each lazy-loaded image
+    });
+});

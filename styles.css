@@ -471,6 +471,41 @@ main.fade-out {
     transition: transform 0.3s ease;
 }
 
+/* Placeholder image style */
+.lazy-load {
+    background-color: #f0f0f0; /* Placeholder background color */
+    width: 100%;
+    aspect-ratio: 3 / 4; /* Maintain 3:4 aspect ratio */
+    object-fit: cover;
+    border-radius: 4px;
+    transition: opacity 0.3s ease;
+}
+
+.lazy-load.loaded {
+    background-color: transparent; /* Remove placeholder background after loading */
+}
+
+/* Loading spinner */
+.lazy-load::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 20px;
+    height: 20px;
+    border: 2px solid #ccc;
+    border-top-color: #333;
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+    transform: translate(-50%, -50%);
+}
+
+@keyframes spin {
+    to {
+        transform: translate(-50%, -50%) rotate(360deg);
+    }
+}
+
 /* Animations
 ---------------------------------------------*/
 @keyframes fade-in {
