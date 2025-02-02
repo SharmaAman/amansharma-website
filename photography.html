@@ -34,5 +34,27 @@
     </main>
 
     <script src="scripts.js"></script>
+    <footer class="site-footer">
+        <div class="footer-content">
+            <div class="copyright">
+                &copy; 2023 Aman Sharma. All rights reserved.
+            </div>
+            <div class="tech-stack">
+                Built with 
+                <i class="fab fa-html5"></i>
+                <i class="fab fa-css3-alt"></i>
+                <i class="fab fa-js"></i>
+                <i class="fab fa-github"></i>
+                <i class="fab fa-cloudflare"></i>
+                + 
+                <i class="fas fa-coffee"></i>
+            </div>
+        </div>
+    </footer>
+    <script>
+        // Auto-update copyright year
+        document.querySelector('.copyright').innerHTML = 
+            `&copy; ${new Date().getFullYear()} Aman Sharma. All rights reserved.`;
+    </script>
 </body>
 </html>

@@ -346,3 +346,52 @@ nav ul {
         margin-bottom: 1.5rem;
     }
 }
+
+/* Footer Styles */
+.site-footer {
+    background-color: var(--white);
+    border-top: 1px solid var(--gray-2);
+    padding: 2rem 1rem;
+    margin-top: 4rem;
+}
+
+.footer-content {
+    max-width: 800px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 0.9rem;
+    color: #666;
+}
+
+.tech-stack i {
+    margin: 0 0.3rem;
+    transition: color 0.3s ease;
+}
+
+.tech-stack .fa-html5 { color: #e34f26; }
+.tech-stack .fa-css3-alt { color: #264de4; }
+.tech-stack .fa-js { color: #f7df1e; }
+.tech-stack .fa-coffee { color: var(--black); }
+
+.tech-stack i:hover {
+    transform: translateY(-2px);
+}
+
+@media (max-width: 768px) {
+    .footer-content {
+        flex-direction: column;
+        text-align: center;
+        gap: 1rem;
+    }
+}
+
+.fa-cloudflare {
+    color: #F38020; /* Official Cloudflare orange */
+    margin: 0 0.3rem;
+}
+
+.tech-stack .fa-github {
+    color: #181717; /* GitHub's official black */
+}

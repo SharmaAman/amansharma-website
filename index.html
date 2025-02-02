@@ -6,6 +6,7 @@
     <title>Aman Sharma | Data Analyst</title>
     <link rel="stylesheet" href="styles.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&display=swap" rel="stylesheet">
 </head>
 <body>
@@ -111,5 +112,27 @@
     </main>
 
     <script src="scripts.js"></script>
+    <footer class="site-footer">
+        <div class="footer-content">
+            <div class="copyright">
+                &copy; 2023 Aman Sharma. All rights reserved.
+            </div>
+            <div class="tech-stack">
+                Built with 
+                <i class="fab fa-html5"></i>
+                <i class="fab fa-css3-alt"></i>
+                <i class="fab fa-js"></i>
+                <i class="fab fa-github"></i>
+                <i class="fab fa-cloudflare"></i>
+                + 
+                <i class="fas fa-coffee"></i>
+            </div>
+        </div>
+    </footer>
+    <script>
+        // Auto-update copyright year
+        document.querySelector('.copyright').innerHTML = 
+            `&copy; ${new Date().getFullYear()} Aman Sharma. All rights reserved.`;
+    </script>
 </body>
 </html>
