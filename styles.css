@@ -555,7 +555,7 @@ nav ul {
 
     /* Photo grid adjustments */
     .photo-grid {
-        columns: 2;
+        columns: 3;
         padding: 6rem 1rem 1rem;
     }
 
@@ -592,6 +592,6 @@ nav ul {
 
     /* Photo grid adjustments */
     .photo-grid {
-        columns: 1;
+        columns: 2;
     }
 }
