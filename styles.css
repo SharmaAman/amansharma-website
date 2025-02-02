@@ -40,15 +40,22 @@ nav ul {
     list-style: none;
 }
 
+body {
+    opacity: 1;
+    transition: opacity 0.5s ease;
+}
+
+body.fade-out {
+    opacity: 0;
+}
+
 .nav-link {
     position: relative;
     color: var(--black);
     text-decoration: none;
     font-weight: 500;
-    transition: all 0.3s ease;
-    padding: 0.5rem 1rem; /* Add padding to match the resume button */
-    border-radius: 4px; /* Add border-radius to match the resume button */
-    border: 1px solid transparent; /* Add border to match the resume button */
+    padding: 0.5rem 1rem; /* Add padding for better click area */
+    transition: color 0.3s ease;
 }
 
 .nav-link.active {
@@ -57,8 +64,19 @@ nav ul {
     border: 1px solid var(--gray-2); /* Match the resume button border */
 }
 
+.nav-link.active::after {
+    width: 100%; /* Full width for the active link */
+}
+
 .nav-link::after {
-    display: none; /* Remove the underline effect */
+    content: '';
+    position: absolute;
+    bottom: -5px; /* Position the underline below the text */
+    left: 0;
+    width: 0; /* Start with no width */
+    height: 2px; /* Thickness of the underline */
+    background: var(--black); /* Color of the underline */
+    transition: width 0.3s ease; /* Smooth sliding animation */
 }
 
 .nav-link:hover {
@@ -67,6 +85,9 @@ nav ul {
     border: 1px solid var(--gray-2); /* Match the resume button border */
 }
 
+.nav-link:hover::after {
+    width: 100%; /* Full width on hover */
+}
 /* Hero Section
 ---------------------------------------------*/
 .hero {
