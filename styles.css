@@ -49,6 +49,15 @@ body.fade-out {
     opacity: 0;
 }
 
+main {
+    opacity: 1;
+    transition: opacity 0.3s ease;
+}
+
+main.fade-out {
+    opacity: 0;
+}
+
 .nav-link {
     position: relative;
     color: var(--black);

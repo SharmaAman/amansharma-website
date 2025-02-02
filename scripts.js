@@ -63,8 +63,40 @@ document.addEventListener('DOMContentLoaded', function () {
     });
 });
 
+// Function to load content dynamically
+function loadContent(url) {
+    fetch(url)
+        .then(response => response.text())
+        .then(html => {
+            // Extract the content from the fetched page
+            const parser = new DOMParser();
+            const doc = parser.parseFromString(html, 'text/html');
+            const newContent = doc.querySelector('main').innerHTML;
 
-// Smooth page transitions
+            // Update the content area
+            document.querySelector('main').innerHTML = newContent;
+
+            // Update the active link in the navigation bar
+            updateActiveLink(url);
+        })
+        .catch(error => console.error('Error loading content:', error));
+}
+
+// Function to update the active link in the navigation bar
+function updateActiveLink(url) {
+    const navLinks = document.querySelectorAll('.nav-link');
+    navLinks.forEach(link => {
+        const linkPage = link.getAttribute('href').split('/').pop();
+        const currentPage = url.split('/').pop();
+        if (linkPage === currentPage) {
+            link.classList.add('active');
+        } else {
+            link.classList.remove('active');
+        }
+    });
+}
+
+// Add event listeners to navigation links
 document.addEventListener('DOMContentLoaded', function () {
     const navLinks = document.querySelectorAll('.nav-link');
 
@@ -73,13 +105,23 @@ document.addEventListener('DOMContentLoaded', function () {
             event.preventDefault(); // Prevent default link behavior
             const targetPage = link.getAttribute('href');
 
-            // Add fade-out class to the body
-            document.body.classList.add('fade-out');
+            // Update the browser history
+            history.pushState(null, '', targetPage);
 
-            // Wait for the fade-out animation to complete, then navigate
-            setTimeout(() => {
-                window.location.href = targetPage;
-            }, 500); // Match the duration of the fade-out animation
+            // Load the new content
+            loadContent(targetPage);
         });
     });
+
+    // Handle back/forward navigation
+    window.addEventListener('popstate', function () {
+        loadContent(window.location.pathname);
+    });
+
+    // Highlight the current page on load
+    const currentPage = window.location.pathname.split('/').pop() || 'index.html';
+    updateActiveLink(currentPage);
 });
+
+
+
