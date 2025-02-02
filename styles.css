@@ -63,6 +63,14 @@ nav ul {
     width: 100%;
 }
 
+.nav-link.active {
+    color: #000; /* Change to your desired color */
+    font-weight: bold; /* Optional: Make the active link bold */
+}
+
+.nav-link.active::after {
+    width: 100%; /* Ensure the underline is fully visible */
+}
 /* Hero Section
 ---------------------------------------------*/
 .hero {
@@ -452,8 +460,8 @@ nav ul {
 /* Profile Image
 ---------------------------------------------*/
 .profile-image-container {
-    width: 150px;
-    height: 150px;
+    width: 250px;
+    height: 250px;
     margin: 0 auto 2rem;
     padding: 5px;
     border: 3px solid var(--black);
@@ -556,8 +564,8 @@ nav ul {
 
     /* Profile image adjustments */
     .profile-image-container {
-        width: 120px;
-        height: 120px;
+        width: 180px;
+        height: 180px;
         margin-bottom: 1.5rem;
     }
 

@@ -30,3 +30,15 @@ document.querySelectorAll('.content-section').forEach((el) => {
     el.style.transform = 'translateY(20px)';
     observer.observe(el);
 });
+
+document.addEventListener('DOMContentLoaded', function() {
+    const currentPage = window.location.pathname.split('/').pop() || 'index.html';
+    const navLinks = document.querySelectorAll('.nav-link');
+
+    navLinks.forEach(link => {
+        const linkPage = link.getAttribute('href').split('/').pop();
+        if (linkPage === currentPage || (currentPage === '' && linkPage === 'index.html')) {
+            link.classList.add('active');
+        }
+    });
+});
