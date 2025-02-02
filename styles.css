@@ -45,32 +45,28 @@ nav ul {
     color: var(--black);
     text-decoration: none;
     font-weight: 500;
-    transition: color 0.3s ease;
-}
-
-.nav-link::after {
-    content: '';
-    position: absolute;
-    bottom: -2px;
-    left: 0;
-    width: 0;
-    height: 1px;
-    background: var(--black);
-    transition: width 0.3s ease;
-}
-
-.nav-link:hover::after {
-    width: 100%;
+    transition: all 0.3s ease;
+    padding: 0.5rem 1rem; /* Add padding to match the resume button */
+    border-radius: 4px; /* Add border-radius to match the resume button */
+    border: 1px solid transparent; /* Add border to match the resume button */
 }
 
 .nav-link.active {
-    color: #000; /* Change to your desired color */
-    font-weight: bold; /* Optional: Make the active link bold */
+    background: var(--gray-1); /* Match the resume button background */
+    color: var(--black); /* Match the resume button text color */
+    border: 1px solid var(--gray-2); /* Match the resume button border */
 }
 
-.nav-link.active::after {
-    width: 100%; /* Ensure the underline is fully visible */
+.nav-link::after {
+    display: none; /* Remove the underline effect */
 }
+
+.nav-link:hover {
+    background: var(--gray-1); /* Match the resume button background */
+    color: var(--black); /* Match the resume button text color */
+    border: 1px solid var(--gray-2); /* Match the resume button border */
+}
+
 /* Hero Section
 ---------------------------------------------*/
 .hero {
@@ -124,7 +120,7 @@ nav ul {
     justify-content: center;
     width: 40px;
     height: 40px;
-    border: 1px solid var(--black);
+    border: 1px solid var(--gray-2);
     border-radius: 50%;
     color: var(--black);
     text-decoration: none;
@@ -133,8 +129,9 @@ nav ul {
 }
 
 .social-link:hover {
-    color: var(--white);
-    background: var(--black);
+    background: var(--gray-1); /* Match the resume button background */
+    color: var(--black); /* Match the resume button text color */
+    border: 1px solid var(--gray-2); /* Match the resume button border */
     transform: translateY(-3px);
 }
 
@@ -224,8 +221,8 @@ nav ul {
 }
 
 .skill-item:hover {
-    background: var(--black);
-    color: var(--white);
+    background: var(--gray-1);
+    color: var(--black);
     transform: translateY(-2px);
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
@@ -460,8 +457,8 @@ nav ul {
 /* Profile Image
 ---------------------------------------------*/
 .profile-image-container {
-    width: 250px;
-    height: 250px;
+    width: 150px;
+    height: 150px;
     margin: 0 auto 2rem;
     padding: 5px;
     border: 3px solid var(--black);
@@ -564,8 +561,8 @@ nav ul {
 
     /* Profile image adjustments */
     .profile-image-container {
-        width: 180px;
-        height: 180px;
+        width: 120px;
+        height: 120px;
         margin-bottom: 1.5rem;
     }
 

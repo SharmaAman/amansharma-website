@@ -39,6 +39,8 @@ document.addEventListener('DOMContentLoaded', function() {
         const linkPage = link.getAttribute('href').split('/').pop();
         if (linkPage === currentPage || (currentPage === '' && linkPage === 'index.html')) {
             link.classList.add('active');
+        } else {
+            link.classList.remove('active'); // Ensure other links are not active
         }
     });
 });
