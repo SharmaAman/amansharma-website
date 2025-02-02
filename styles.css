@@ -427,9 +427,12 @@ main.fade-out {
     padding: 8rem 2rem 2rem;
 }
 
+
 .photo-grid img {
     width: 100%;
     height: auto;
+    aspect-ratio: 3 / 4; /* Set aspect ratio to 3:4 */
+    object-fit: cover; /* Ensure the image covers the area */
     margin-bottom: 1rem;
     border-radius: 4px;
     cursor: pointer;
@@ -441,8 +444,7 @@ main.fade-out {
     transform: scale(1.02);
 }
 
-/* Lightbox
----------------------------------------------*/
+/* Lightbox */
 .lightbox {
     display: none;
     position: fixed;
@@ -455,6 +457,7 @@ main.fade-out {
     align-items: center;
     cursor: pointer;
     z-index: 2000;
+    overflow: hidden; /* Prevent scrolling */
 }
 
 .lightbox.active {
@@ -465,6 +468,7 @@ main.fade-out {
     max-width: 90%;
     max-height: 90%;
     border-radius: 4px;
+    transition: transform 0.3s ease;
 }
 
 /* Animations
@@ -585,8 +589,11 @@ main.fade-out {
 
     /* Photo grid adjustments */
     .photo-grid {
-        columns: 3;
-        padding: 6rem 1rem 1rem;
+        columns: 3 300px;
+        gap: 1rem;
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 8rem 2rem 2rem;
     }
 
     /* Profile image adjustments */

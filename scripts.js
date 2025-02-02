@@ -1,28 +1,97 @@
 // Lightbox functionality
+let currentImageIndex = 0;
+let images = [];
+
 function openLightbox(imgElement) {
     const lightbox = document.querySelector('.lightbox');
     const lightboxImg = lightbox.querySelector('img');
     lightboxImg.src = imgElement.src;
     lightbox.classList.add('active');
+
+    // Prevent background scrolling
+    document.body.style.overflow = 'hidden';
+
+    // Get all images in the grid
+    images = Array.from(document.querySelectorAll('.photo-grid img'));
+    currentImageIndex = images.indexOf(imgElement);
+
+    // Add touch event listeners
+    lightbox.addEventListener('touchstart', handleTouchStart, false);
+    lightbox.addEventListener('touchmove', handleTouchMove, false);
 }
 
 function closeLightbox() {
-    document.querySelector('.lightbox').classList.remove('active');
+    const lightbox = document.querySelector('.lightbox');
+    lightbox.classList.remove('active');
+
+    // Restore background scrolling
+    document.body.style.overflow = 'auto';
+
+    // Remove touch event listeners
+    lightbox.removeEventListener('touchstart', handleTouchStart, false);
+    lightbox.removeEventListener('touchmove', handleTouchMove, false);
+}
+
+let xDown = null;
+let yDown = null;
+
+function handleTouchStart(event) {
+    const firstTouch = event.touches[0];
+    xDown = firstTouch.clientX;
+    yDown = firstTouch.clientY;
+}
+
+function handleTouchMove(event) {
+    if (!xDown || !yDown) {
+        return;
+    }
+
+    const xUp = event.touches[0].clientX;
+    const yUp = event.touches[0].clientY;
+
+    const xDiff = xDown - xUp;
+    const yDiff = yDown - yUp;
+
+    if (Math.abs(xDiff) > Math.abs(yDiff)) {
+        // Horizontal swipe
+        if (xDiff > 0) {
+            // Swipe left
+            showNextImage();
+        } else {
+            // Swipe right
+            showPreviousImage();
+        }
+    } else {
+        // Vertical swipe
+        if (yDiff > 0) {
+            // Swipe up
+            closeLightbox();
+        } else {
+            // Swipe down
+            closeLightbox();
+        }
+    }
+
+    // Reset values
+    xDown = null;
+    yDown = null;
+}https://i.postimg.cc/V6Ny47Mg/DSCF0033.jpg
+
+function showNextImage() {
+    currentImageIndex = (currentImageIndex + 1) % images.length;
+    const lightboxImg = document.querySelector('.lightbox img');
+    lightboxImg.src = images[currentImageIndex].src;
+}
+
+function showPreviousImage() {
+    currentImageIndex = (currentImageIndex - 1 + images.length) % images.length;
+    const lightboxImg = document.querySelector('.lightbox img');
+    lightboxImg.src = images[currentImageIndex].src;
 }
 
 // Close lightbox on ESC key
 document.addEventListener('keydown', (e) => {
     if (e.key === 'Escape') closeLightbox();
-});
-
-// Scroll animations
-const observer = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-        if (entry.isIntersecting) {
-            entry.target.style.opacity = 1;
-            entry.target.style.transform = 'translateY(0)';
-        }
-    });
 });
 
 document.querySelectorAll('.content-section').forEach((el) => {
