@@ -181,25 +181,47 @@ nav ul {
 
 /* Skills Grid
 ---------------------------------------------*/
+.skills-categories {
+    display: flex;
+    flex-direction: column;
+    gap: 0rem;
+}
+
+.skills-category {
+    margin-bottom: 0rem;
+}
+.skills-category h3 {
+    margin-bottom: 0rem;
+    font-size: 1.1rem;
+    color: var(--black);
+    /* border-bottom: 2px solid var(--black); */
+    padding-bottom: 0.5rem;
+}
+
 .skills-grid {
-    display: grid;
-    gap: 1rem;
-    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    display: flex;
+    gap: 0.5rem;
+    flex-wrap: wrap;
+    margin-bottom: 1rem;
 }
 
 .skill-item {
-    padding: 1rem;
-    text-align: center;
-    border: 1px solid var(--gray-2);
-    border-radius: 100px;
+    background: var(--gray-1);
+    padding: 0.3rem 0.7rem;
+    border-radius: 4px;
+    font-size: 0.8rem;
+    color: #444;
+    border: none;
     transition: all 0.3s ease;
 }
 
 .skill-item:hover {
-    color: var(--white);
     background: var(--black);
-    transform: translateY(-3px);
+    color: var(--white);
+    transform: translateY(-2px);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
+
 
 /* Experience
 ---------------------------------------------*/
