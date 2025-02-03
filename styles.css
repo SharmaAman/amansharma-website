@@ -186,7 +186,7 @@ main.fade-out {
 /* Content Sections
 ---------------------------------------------*/
 .content-section {
-    max-width: 800px;
+    max-width: max(70%, 800px);
     margin: 0 auto;
     padding: 1rem 1rem;
 }
@@ -214,11 +214,31 @@ main.fade-out {
     line-height: 1.7;
 }
 
+/* Education Wrapping Grid
+---------------------------------------------*/
+.education-grid {
+    display: grid;
+    gap: 2rem;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    /* flex-direction: column; */
+    margin-bottom: 3rem;
+}
+
+.education-card {
+    padding: 1.5rem;
+    position: relative;
+    border: 1px solid var(--gray-2);
+    border-radius: 4px;
+    transition: all 0.3s ease;
+}
+
+
 /* Skills Grid
 ---------------------------------------------*/
 .skills-categories {
-    display: flex;
-    flex-direction: column;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    /* flex-direction: column; */
     gap: 0rem;
 }
 
@@ -351,7 +371,7 @@ main.fade-out {
     .education-icon {
         width: 40px; /* Smaller size for mobile */
         height: 40px;
-        top: -02%;
+        top: -2%;
         right: -12px;
     }
 }
