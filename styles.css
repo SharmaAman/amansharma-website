@@ -100,7 +100,7 @@ main.fade-out {
 /* Hero Section
 ---------------------------------------------*/
 .hero {
-    max-width: 800px;
+    max-width: max(75%, 850px);
     margin: 0 auto;
     padding: 12rem 2rem 4rem;
     text-align: center;
@@ -186,7 +186,7 @@ main.fade-out {
 /* Content Sections
 ---------------------------------------------*/
 .content-section {
-    max-width: max(70%, 800px);
+    max-width: max(75%, 850px);
     margin: 0 auto;
     padding: 1rem 1rem;
 }
