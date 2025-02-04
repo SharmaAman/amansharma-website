@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Aman Sharma | Home</title>
+    <link rel="stylesheet" href="styles.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
+    <header class="header">
+      <nav>
+        <ul>
+          <li><a href="index.html" class="nav-link">Home</a></li>
+          <li><a href="projects.html" class="nav-link">Projects</a></li>
+          <li><a href="photography.html" class="nav-link">Photography</a></li>
+        </ul>
+      </nav>
+    </header>
+
+    <main id="content">
+      <section class="hero">
+        <div class="hero-content">
+          <h1 class="hero-title animate-fade">Projects!</h1>
+          <p class="hero-subtitle">
+            These are projects I'm currently working on or have worked on in the
+            past. Please feel free to provide feedback or suggestions.
+          </p>
+        </div>
+
+        <!-- <div class="divider"></div> -->
+      </section>
+
+      <section class="content-section">
+        <h2>Projects</h2>
+
+        <div class="projects-grid">
+          <div class="project-card">
+            <h3>SQL Analytical Framework</h3>
+            <p class="project-description">
+              Financial Data Analysis of Major US Banks.
+            </p>
+            <div class="tech-tags">
+              <span>SQL</span>
+              <span>Python</span>
+              <span>yfinance</span>
+            </div>
+            <a
+              href="https://public.tableau.com/shared/R5KTXNYDK?:display_count=n&:origin=viz_share_link"
+              class="project-link"
+              >View Hex Project →</a
+            >
+          </div>
+
+          <div class="project-card">
+            <h3>Tableau Datastory</h3>
+            <p class="project-description">
+              Interactive datastory showing Fatal Accidents in Formula 1 using
+              Tableau.
+            </p>
+            <div class="tech-tags">
+              <span>Tableau</span>
+              <span>Business Intelligence</span>
+              <span>Kaggle</span>
+            </div>
+            <a
+              href="https://public.tableau.com/shared/R5KTXNYDK?:display_count=n&:origin=viz_share_link"
+              class="project-link"
+              >View Datastory →</a
+            >
+          </div>
+
+          <div class="project-card">
+            <h3>F1 Analyser (Currently WIP)</h3>
+            <p class="project-description">
+              Python based F1 Analyser that uses FastF1 API. Hosted using
+              Streamlit. Please click on 'Yes, get this app back up' if asked.
+            </p>
+            <div class="tech-tags">
+              <span>Python</span>
+              <span>FastAPI</span>
+              <span>Plotly</span>
+              <span>Streamlit</span>
+            </div>
+            <a href="#" class="project-link">View Analyser →</a>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <script src="scripts.js"></script>
+    <footer class="site-footer">
+      <div class="footer-content">
+        <div class="copyright">
+          &copy; 2023 Aman Sharma. All rights reserved.
+        </div>
+        <div class="tech-stack">
+          Built with
+          <i class="fab fa-html5"></i>
+          <i class="fab fa-css3-alt"></i>
+          <i class="fab fa-js"></i>
+          <i class="fab fa-github"></i>
+          <i class="fab fa-cloudflare"></i>
+          +
+          <i class="fas fa-coffee"></i>
+        </div>
+      </div>
+    </footer>
+    <script>
+      // Auto-update copyright year
+      document.querySelector(
+        ".copyright"
+      ).innerHTML = `&copy; ${new Date().getFullYear()} Aman Sharma. All rights reserved.`;
+    </script>
+  </body>
+</html>

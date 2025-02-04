@@ -68,9 +68,9 @@ main.fade-out {
 }
 
 .nav-link.active {
-    background: var(--gray-1); /* Match the resume button background */
+    background: var(--white); /* Match the resume button background */
     color: var(--black); /* Match the resume button text color */
-    border: 1px solid var(--gray-2); /* Match the resume button border */
+    border: 0px solid var(--gray-2); /* Match the resume button border */
 }
 
 .nav-link.active::after {
