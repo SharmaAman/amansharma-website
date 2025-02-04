@@ -28,15 +28,32 @@
     <main id="content">
       <section class="hero">
         <div class="hero-content">
-          <h1 class="hero-title animate-fade">SQL Based Analytical Framework built on Hex</h1>
+          <h1 class="hero-title animate-fade">
+            SQL Based Analytical Framework built on Hex
+          </h1>
           <p class="hero-subtitle">
-            This uses SQL mainly to look at the financial data of major US
-            Banks.
+            This uses SQL primarly to look at the financial data of major US
+            Banks. A lot of simple data analysis can be done without requiring
+            the use of Python or R and this project is my attempt to demonstrate
+            it.
           </p>
+          <div class="socials">
+            <a
+              href="assets\Financial_Data_Analysis_of_Major_US_Banks__A_SQL_Driven_Approach-By-Aman.pdf"
+              class="resume-btn"
+            >
+              Download Analysis <i class="fas fas fa-download"></i><br />
+            </a>
+          </div>
           <div class="hex-embed">
+            <!-- <iframe
+              src="https://app.hex.tech/9904b291-6fd2-4284-bdf9-28d815a3c965/app/9a0934ab-ee3a-4f8d-b6cf-612eb49b4569/latest?embedded=true"
+            ></iframe> -->
+
             <iframe
               src="https://app.hex.tech/9904b291-6fd2-4284-bdf9-28d815a3c965/app/9a0934ab-ee3a-4f8d-b6cf-612eb49b4569/latest?embedded=true"
-            ></iframe>
+            >
+            </iframe>
           </div>
         </div>
       </section>
@@ -65,6 +82,17 @@
       document.querySelector(
         ".copyright"
       ).innerHTML = `&copy; ${new Date().getFullYear()} Aman Sharma. All rights reserved.`;
+    </script>
+    <script>
+      const iframe = document.querySelector("iframe");
+
+      iframe.addEventListener("mouseenter", () => {
+        document.body.style.overflow = "hidden"; // Disable body scrolling
+      });
+
+      iframe.addEventListener("mouseleave", () => {
+        document.body.style.overflow = ""; // Re-enable body scrolling
+      });
     </script>
   </body>
 </html>

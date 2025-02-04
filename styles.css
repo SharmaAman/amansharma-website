@@ -438,15 +438,21 @@ main.fade-out {
 /* Embed
 ---------------------------------------------*/
 .hex-embed {
+    margin-top: 2.5%;
     position: relative;
     width: 100%;
-    height: 200vh; /* 100% of the viewport height */
+    height: 100vh; /* 100% of the viewport height */
   }
   
   iframe {
     width: 100%;
     height: 100%;
     border: none; /* Remove border */
+  }
+
+  .no-scroll {
+    overflow: hidden;
+    height: 100%; /* Ensure the page takes up the full height */
   }
 
 /* Photography Grid
