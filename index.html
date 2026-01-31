@@ -1,25 +1,430 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>WIP</title>
+  <meta charset="utf-8" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;400;500&display=swap" rel="stylesheet">
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Aman Sharma</title>
+  <meta name="description" content="Photography by Your Name" />
+
   <style>
-    body {
-      margin: 0;
-      height: 100vh;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      background-color: #f4f4f4;
-      font-family: Arial, sans-serif;
+    :root {
+      --bg: #ffffff;
+      --fg: #111111;
+      --muted: #666666;
+      --border: #e6e6e6;
+      --max: 1200px;
     }
-    h1 {
-      font-size: 4rem;
-      color: #555;
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html, body {
+      margin: 0;
+      background: var(--bg);
+      color: var(--fg);
+      font-family: "Inter", system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, sans-serif;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    body {
+      padding: 32px 16px 72px;
+    }
+
+    .wrap {
+      max-width: var(--max);
+      margin: 0 auto;
+    }
+
+    /* Header */
+ header {
+  margin-bottom: 56px;
+  text-align: center;
+}
+
+
+a {
+  color: inherit;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+a:hover {
+  opacity: 0.7;
+}
+
+h1 {
+  font-size: 2.0rem;
+  font-weight: 350;
+  margin: 0 0 12px;
+  letter-spacing: 0.3px;
+}
+
+.desc {
+  max-width: 60ch;
+  margin: 0 auto;
+  color: var(--muted);
+  font-size: 1rem;
+  line-height: 1.6;
+}
+
+
+    
+    
+    /* Masonry gallery (no cropping) */
+.gallery {
+  column-count: 2;
+  column-gap: 12px;
+}
+
+@media (min-width: 640px) {
+  .gallery { column-count: 3; column-gap: 14px; }
+}
+@media (min-width: 1024px) {
+  .gallery { column-count: 4; column-gap: 16px; }
+}
+
+.tile {
+  width: 100%;
+  display: inline-block;     /* important for columns */
+  margin: 0 0 12px;          /* vertical spacing */
+  padding: 0;
+  border: 0;
+  background: none;
+  cursor: pointer;
+}
+
+.tile img {
+  width: 100%;
+  height: auto;
+  display: block;
+  transition: opacity .2s ease;
+}
+
+.tile:hover img { opacity: .92; }
+
+
+    /* Lightbox */
+    .lightbox {
+      position: fixed;
+      inset: 0;
+      background: rgba(255,255,255,0.96);
+      display: none;
+      z-index: 999;
+    }
+
+    .lightbox.open {
+      display: block;
+    }
+
+    .lb-inner {
+      height: 100%;
+      display: grid;
+      grid-template-rows: auto 1fr auto;
+      padding: 20px;
+      gap: 14px;
+    }
+
+    .lb-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 0.9rem;
+      color: var(--muted);
+    }
+
+    .lb-stage {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+    }
+
+    .lb-img {
+      max-width: 100%;
+      max-height: 100%;
+      object-fit: contain;
+    }
+
+    .lb-controls {
+      display: flex;
+      justify-content: space-between;
+      font-size: 0.9rem;
+    }
+
+    .lb-btn {
+      background: none;
+      border: none;
+      padding: 6px 0;
+      color: var(--fg);
+      cursor: pointer;
+    }
+
+    .lb-btn:hover {
+      text-decoration: underline;
+    }
+
+    footer {
+      margin-top: 56px;
+      font-size: 0.85rem;
+      color: var(--muted);
     }
   </style>
 </head>
+
 <body>
-  <h1>WIP</h1>
+  <div class="wrap">
+    <header>
+      <h1>Aman Sharma</h1>
+      <p class="desc">
+        Some of my favorite photographs. <br>
+More at <a href="https://vsco.co/amansharma/gallery" target="_blank" rel="noopener">VSCO</a>.
+<br>
+ 📸
+      </p>
+    </header>
+
+    <main class="gallery" id="gallery"></main>
+
+    <footer>
+      © <span id="year"></span>
+    </footer>
+  </div>
+
+  <!-- Lightbox -->
+  <div class="lightbox" id="lightbox">
+    <div class="lb-inner">
+      <div class="lb-top">
+        <span id="counter"></span>
+        <button class="lb-btn" id="close">Close</button>
+      </div>
+
+      <div class="lb-stage" id="stage">
+        <img class="lb-img" id="lbImg" alt="">
+      </div>
+
+      <div class="lb-controls">
+        <button class="lb-btn" id="prev">Previous</button>
+        <button class="lb-btn" id="next">Next</button>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    const PHOTOS = [
+      'https://i.postimg.cc/GpWYxfZw/DSCF1221-01.jpg',
+'https://i.postimg.cc/pTKjGZH9/DSCF1396.jpg',
+'https://i.postimg.cc/7ZCn1Sfz/20241020-105240.jpg',
+'https://i.postimg.cc/WbzGj0my/20241130-174748.jpg',
+'https://i.postimg.cc/rpNcf0HV/2024-1112-15353900.jpg',
+'https://i.postimg.cc/FRPv4tmw/2024-1112-15510400.jpg',
+'https://i.postimg.cc/V6Ny47Mg/DSCF0033.jpg',
+'https://i.postimg.cc/66gsLfQV/DSCF0044.jpg',
+'https://i.postimg.cc/BvrYPMpt/DSCF0046.jpg',
+'https://i.postimg.cc/gJ77sGGc/DSCF0048.jpg',
+'https://i.postimg.cc/ThM48QyZ/DSCF0049.jpg',
+'https://i.postimg.cc/j2gSZwLw/DSCF0052.jpg',
+'https://i.postimg.cc/C5fQ69KG/DSCF0053.jpg',
+'https://i.postimg.cc/8zrzmCDc/DSCF0054.jpg',
+'https://i.postimg.cc/SxqmCfZT/DSCF0056.jpg',
+'https://i.postimg.cc/t4hHgnp3/DSCF0057.jpg',
+'https://i.postimg.cc/zXgsdHLs/DSCF0062.jpg',
+'https://i.postimg.cc/fTYwVrvS/DSCF0064.jpg',
+'https://i.postimg.cc/rpM2Rywv/DSCF0066.jpg',
+'https://i.postimg.cc/3wKzJLLh/DSCF0070.jpg',
+'https://i.postimg.cc/vZ7pyRtX/DSCF0076.jpg',
+'https://i.postimg.cc/NG3sfcRw/DSCF0077.jpg',
+'https://i.postimg.cc/cHVSHRgc/DSCF0082.jpg',
+'https://i.postimg.cc/hPvjhr59/DSCF0084.jpg',
+'https://i.postimg.cc/kMc62DXd/DSCF0090.jpg',
+'https://i.postimg.cc/CMBMg1BN/DSCF0094.jpg',
+'https://i.postimg.cc/zf25mZq6/DSCF0099.jpg',
+'https://i.postimg.cc/NM8y7j6m/DSCF0112.jpg',
+'https://i.postimg.cc/P5nB0fYP/DSCF0114.jpg',
+'https://i.postimg.cc/VNDpSjTC/DSCF0121.jpg',
+'https://i.postimg.cc/hGWT96FF/DSCF0157.jpg',
+'https://i.postimg.cc/c4zQJ6XL/DSCF0157-1.jpg',
+'https://i.postimg.cc/VkMzbHBb/DSCF0161.jpg',
+'https://i.postimg.cc/7hWqSFWS/DSCF0166.jpg',
+'https://i.postimg.cc/NfKsQ0KD/DSCF0171.jpg',
+'https://i.postimg.cc/pdrbJGKZ/DSCF0232.jpg',
+'https://i.postimg.cc/0jBJrHGB/DSCF0237.jpg',
+'https://i.postimg.cc/ZRYm2Ykr/DSCF0239.jpg',
+'https://i.postimg.cc/vHCQTd9s/DSCF0249.jpg',
+'https://i.postimg.cc/nLJpKY0S/DSCF0274.jpg',
+'https://i.postimg.cc/tRSR0647/DSCF0281.jpg',
+'https://i.postimg.cc/QCH3N6dC/DSCF0287.jpg',
+'https://i.postimg.cc/mgqVK80V/DSCF0289.jpg',
+'https://i.postimg.cc/HLRK4pYY/DSCF0290.jpg',
+'https://i.postimg.cc/PJmB5Bkt/DSCF0292.jpg',
+'https://i.postimg.cc/QCryw0Kv/DSCF0298.jpg',
+'https://i.postimg.cc/KjJDfNPP/DSCF0311.jpg',
+'https://i.postimg.cc/L5qcFnxZ/DSCF0336.jpg',
+'https://i.postimg.cc/W1tX9Qfh/DSCF0337.jpg',
+'https://i.postimg.cc/sf7FmZGt/DSCF0346.jpg',
+'https://i.postimg.cc/jjLm7Wr3/DSCF1003.jpg',
+'https://i.postimg.cc/65WHZ7rV/DSCF1008.jpg',
+'https://i.postimg.cc/9QNNCWqd/DSCF1009.jpg',
+'https://i.postimg.cc/JnQnHd8Q/DSCF1016.jpg',
+'https://i.postimg.cc/wjS3CmFD/DSCF1018.jpg',
+'https://i.postimg.cc/jqXcRspD/DSCF1024.jpg',
+'https://i.postimg.cc/W37GpnfB/DSCF1027.jpg',
+'https://i.postimg.cc/nLhZwcfq/DSCF1030.jpg',
+'https://i.postimg.cc/d13XGhPS/DSCF1045.jpg',
+'https://i.postimg.cc/zBNw1Mpw/DSCF1056.jpg',
+'https://i.postimg.cc/h4pLH2mx/DSCF1077.jpg',
+'https://i.postimg.cc/mrnxXYwG/DSCF1082.jpg',
+'https://i.postimg.cc/6QnVgwV5/DSCF1092.jpg',
+'https://i.postimg.cc/26LsP1cL/DSCF1095.jpg',
+'https://i.postimg.cc/Kv26Hvn4/DSCF1098.jpg',
+'https://i.postimg.cc/d1c6VDQy/DSCF1105.jpg',
+'https://i.postimg.cc/RCDmpzgH/DSCF1112.jpg',
+'https://i.postimg.cc/kMbCHpzY/DSCF1114.jpg',
+'https://i.postimg.cc/s2QH2tpt/DSCF1117.jpg',
+'https://i.postimg.cc/htG3kJh4/DSCF1122.jpg',
+'https://i.postimg.cc/FRfvNWRR/DSCF1124.jpg',
+'https://i.postimg.cc/zf7ZCmL3/DSCF1125.jpg',
+'https://i.postimg.cc/Gt0WrbV7/DSCF1128.jpg',
+'https://i.postimg.cc/KcnVBSdb/DSCF1142.jpg',
+'https://i.postimg.cc/x1Wy6qz4/DSCF1184.jpg',
+'https://i.postimg.cc/dVWg32gT/DSCF1187.jpg',
+'https://i.postimg.cc/MK99mW5C/DSCF1191.jpg',
+'https://i.postimg.cc/Hs0gY7pQ/DSCF1196.jpg',
+'https://i.postimg.cc/qMvLRPrj/DSCF1204.jpg',
+'https://i.postimg.cc/HnxpcYBp/DSCF1225-01.jpg',
+'https://i.postimg.cc/Gmc1Hh26/DSCF1300.jpg',
+'https://i.postimg.cc/RVLk55Rd/DSCF1303.jpg',
+'https://i.postimg.cc/W4GpxfdP/DSCF1304.jpg',
+'https://i.postimg.cc/q7yg4vZS/DSCF1325.jpg',
+'https://i.postimg.cc/BbqC2yKZ/DSCF1327.jpg',
+'https://i.postimg.cc/gjkvxZCn/DSCF1340.jpg',
+'https://i.postimg.cc/6q3vWNZZ/DSCF1348.jpg',
+'https://i.postimg.cc/KjqtBYbQ/DSCF1353.jpg',
+'https://i.postimg.cc/C1CNBYd6/DSCF1354.jpg',
+'https://i.postimg.cc/tCkMvdqm/DSCF1358.jpg',
+'https://i.postimg.cc/RV4YTpBH/DSCF1371.jpg',
+'https://i.postimg.cc/7ZCftV1x/DSCF1374.jpg',
+'https://i.postimg.cc/brNvxHNf/DSCF1384.jpg',
+'https://i.postimg.cc/8PXbrZPD/DSCF1391.jpg',
+'https://i.postimg.cc/TwQd3Lj7/DSCF1394.jpg',
+'https://i.postimg.cc/Kzbjzh6z/DSCF1414.jpg',
+'https://i.postimg.cc/vZ65xMNL/DSCF1431.jpg',
+'https://i.postimg.cc/bvxbLg8Z/DSCF1437.jpg',
+'https://i.postimg.cc/4NxKVZmH/DSCF1562.jpg',
+'https://i.postimg.cc/DZ7fhdG4/DSCF1591.jpg',
+'https://i.postimg.cc/TwvLDDDT/DSCF1595.jpg',
+'https://i.postimg.cc/zGWRX7yx/DSCF1598.jpg',
+'https://i.postimg.cc/02KsLH4H/DSCF1600.jpg',
+'https://i.postimg.cc/cJntCm6D/DSCF1613.jpg',
+'https://i.postimg.cc/vH24vjVq/DSCF1617.jpg',
+'https://i.postimg.cc/L4N5H7N9/DSCF1626.jpg',
+'https://i.postimg.cc/t40Yf6BW/DSCF1629.jpg',
+'https://i.postimg.cc/rsQK3ZYp/DSCF1728.jpg',
+'https://i.postimg.cc/xTZdmzwB/DSCF1737.jpg',
+'https://i.postimg.cc/htFBg1W4/DSCF1739.jpg',
+'https://i.postimg.cc/j2GGxt13/DSCF1762.jpg',
+'https://i.postimg.cc/7ZPpqstk/DSCF1781.jpg',
+'https://i.postimg.cc/VkRmR0pY/DSCF1791.jpg',
+'https://i.postimg.cc/J0ZWBsjC/DSCF1792.jpg',
+'https://i.postimg.cc/t42GPQnJ/DSCF1795.jpg',
+'https://i.postimg.cc/1XcjQwpX/DSCF1799.jpg',
+'https://i.postimg.cc/7hdfqJwv/IMG-20241204-WA0082.jpg',
+'https://i.postimg.cc/90rD3Y3t/IMG-20241204-WA0097.jpg',
+'https://i.postimg.cc/Dy4SB6P7/IMG-20241204-WA0100.jpg',
+'https://i.postimg.cc/3JzvTVxy/IMG-20241012-160205.jpg',
+'https://i.postimg.cc/5tSY8tqv/IMG-20241012-160912.jpg',
+'https://i.postimg.cc/DfjGC8VP/IMG-20241012-161023.jpg',
+'https://i.postimg.cc/B6Fzmdbx/IMG-20241020-085827.jpg',
+'https://i.postimg.cc/SQvX638Z/IMG-20241026-003231-818.webp',
+'https://i.postimg.cc/j58Dkk1S/IMG-20241026-003250-677.webp',
+'https://i.postimg.cc/8c17yg43/IMG-20241028-110246.jpg',
+'https://i.postimg.cc/pTcwSDJH/IMG-20241112-161018.jpg',
+'https://i.postimg.cc/C5NmtYgf/IMG-20241112-173603-2.jpg',
+'https://i.postimg.cc/MG2KP8KD/IMG-20241114-120401.jpg',
+'https://i.postimg.cc/Ls1vSjSS/IMG-20241115-071215.jpg',
+'https://i.postimg.cc/3N7tnNPT/IMG-20241115-082849.jpg',
+'https://i.postimg.cc/FRhS6SsD/IMG-20241115-101725.jpg',
+'https://i.postimg.cc/5yTMXwX3/IMG-20241201-145840.jpg',
+'https://i.postimg.cc/RFC3dzXY/IMG-20241204-145709.jpg',
+'https://i.postimg.cc/ncXDNppb/IMG-20241204-150237.jpg',
+'https://i.postimg.cc/pTkjMdmx/IMG-20241204-151000.jpg',
+'https://i.postimg.cc/QM3KB75h/IMG-20241204-152311.jpg',
+'https://i.postimg.cc/BZcYt5KQ/IMG-20250101-134642.jpg',
+'https://i.postimg.cc/gJ3MV8ts/IMG-20250122-143656.jpg',
+
+    ];
+
+    const gallery = document.getElementById("gallery");
+    const lightbox = document.getElementById("lightbox");
+    const lbImg = document.getElementById("lbImg");
+    const counter = document.getElementById("counter");
+
+    let index = 0;
+    document.getElementById("year").textContent = new Date().getFullYear();
+
+    PHOTOS.forEach((src, i) => {
+      const btn = document.createElement("button");
+      btn.className = "tile";
+      const img = document.createElement("img");
+      img.src = src;
+      img.loading = "lazy";
+      btn.appendChild(img);
+      btn.onclick = () => open(i);
+      gallery.appendChild(btn);
+    });
+
+    function open(i) {
+      index = i;
+      update();
+      lightbox.classList.add("open");
+      document.body.style.overflow = "hidden";
+    }
+
+    function close() {
+      lightbox.classList.remove("open");
+      document.body.style.overflow = "";
+    }
+
+    function update() {
+      lbImg.src = PHOTOS[index];
+      counter.textContent = `${index + 1} / ${PHOTOS.length}`;
+    }
+
+    function next() {
+      index = (index + 1) % PHOTOS.length;
+      update();
+    }
+
+    function prev() {
+      index = (index - 1 + PHOTOS.length) % PHOTOS.length;
+      update();
+    }
+
+    document.getElementById("next").onclick = next;
+    document.getElementById("prev").onclick = prev;
+    document.getElementById("close").onclick = close;
+
+    document.addEventListener("keydown", e => {
+      if (!lightbox.classList.contains("open")) return;
+      if (e.key === "Escape") close();
+      if (e.key === "ArrowRight") next();
+      if (e.key === "ArrowLeft") prev();
+    });
+
+    // Swipe support
+    let startX = 0;
+    document.getElementById("stage").addEventListener("touchstart", e => {
+      startX = e.touches[0].clientX;
+    }, { passive: true });
+
+    document.getElementById("stage").addEventListener("touchend", e => {
+      const dx = e.changedTouches[0].clientX - startX;
+      if (dx > 40) prev();
+      if (dx < -40) next();
+    }, { passive: true });
+  </script>
 </body>
 </html>
